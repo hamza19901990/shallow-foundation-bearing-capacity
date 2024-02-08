@@ -73,7 +73,7 @@ def get_input_features():
             'D(m)': D(m),
             'L/B': L/B,
             'angle (degree)': angle (degree),
-            'unit weight (kN/m3)': unit weight (kN/m3),
+            'unit_weight': unit weight (kN/m3),
 
     }
     features = pd.DataFrame(data_user, index=[0])
