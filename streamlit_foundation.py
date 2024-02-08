@@ -20,7 +20,7 @@ st.image(image, use_column_width=True)
 
 data = pd.read_csv(r"foundation1.csv")
 
-req_col_names = ["B", "D", "LoverB", "angle","unit weight","qu"]
+req_col_names = ["B", "D", "LoverB", "angle","unit_weight","qu"]
 curr_col_names = list(data.columns)
 
 mapper = {}
@@ -63,7 +63,7 @@ def get_input_features():
     D = st.sidebar.slider('D(m)',0.000,0.890,0.500)
     LoverB = st.sidebar.slider('L/B', 1.000,6.000,3.000)
     angle = st.sidebar.slider('angle (degree)', 31.950,45.700,33.000)
-    unit weight  = st.sidebar.slider('unit weight (kN/m3)', 9.850,20.800,20.600)
+    unit_weight  = st.sidebar.slider('unit weight (kN/m3)', 9.850,20.800,20.600)
 
 
 
