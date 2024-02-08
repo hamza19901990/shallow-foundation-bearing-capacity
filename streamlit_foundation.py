@@ -69,11 +69,11 @@ def get_input_features():
 
 
 
-    data_user = {'B(m)': B(m),
-            'D(m)': D(m),
-            'L/B': L/B,
-            'angle (degree)': angle (degree),
-            'unit_weight': unit weight (kN/m3),
+    data_user = {'B(m)': B,
+            'D(m)': D,
+            'L/B': LoverB,
+            'angle (degree)': angle,
+            'unit weight (kN/m3)': unit_weight,
 
     }
     features = pd.DataFrame(data_user, index=[0])
