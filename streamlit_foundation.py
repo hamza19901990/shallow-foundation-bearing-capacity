@@ -38,7 +38,6 @@ y = data.iloc[:,-1]          # Target - Last Column
 print(X)
 
 st.sidebar.header('Specify Input Parameters')
-"d10", "d50", "d60", "e"
 def get_input_features():
     B = st.sidebar.slider('B(m)', 0.030,3.016,0.050)
     D = st.sidebar.slider('D(m)',0.000,0.890,0.500)
