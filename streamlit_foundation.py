@@ -33,9 +33,10 @@ data.head()
 data.isna().sum()
 corr = data.corr()
 st.dataframe(data)
+X = data.iloc[:,:-1]         # Features - All columns but last
+y = data.iloc[:,-1]          # Target - Last Column
+print(X)
 
-
-print("Model saved as 'ada_boost_model.pkl'")
 st.sidebar.header('Specify Input Parameters')
 "d10", "d50", "d60", "e"
 def get_input_features():
