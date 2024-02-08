@@ -39,11 +39,11 @@ print(X)
 
 st.sidebar.header('Specify Input Parameters')
 def get_input_features():
-    B = st.sidebar.slider('B(m)', 0.030,3.016,0.050)
-    D = st.sidebar.slider('D(m)',0.000,0.890,0.500)
-    LoverB = st.sidebar.slider('L/B', 1.000,6.000,3.000)
-    angle = st.sidebar.slider('angle (degree)', 31.950,45.700,33.000)
-    unit_weight  = st.sidebar.slider('unit weight (kN/m3)', 9.850,20.800,20.600)
+    B = st.sidebar.slider('B(m)', 0.03,3.02,0.05)
+    D = st.sidebar.slider('D(m)',0.00,0.89,0.50)
+    LoverB = st.sidebar.slider('L/B', 1.00,6.00,3.00)
+    angle = st.sidebar.slider('angle (degree)', 31.95,45.70,33.00)
+    unit_weight  = st.sidebar.slider('unit weight (kN/m3)', 9.85,20.80,20.60)
 
 
 
