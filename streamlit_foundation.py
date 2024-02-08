@@ -20,7 +20,7 @@ st.image(image, use_column_width=True)
 
 data = pd.read_csv(r"foundation1.csv")
 
-req_col_names = ["B(m)", "D(m)", "L/B", "angle (degree)","unit weight (kN/m3)","qu"]
+req_col_names = ["B", "D", "LoverB", "angle","unit weight","qu"]
 curr_col_names = list(data.columns)
 
 mapper = {}
@@ -59,11 +59,11 @@ print("Model saved as 'ada_boost_model.pkl'")
 st.sidebar.header('Specify Input Parameters')
 "d10", "d50", "d60", "e"
 def get_input_features():
-    B(m) = st.sidebar.slider('B(m)', 0.030,3.016,0.050)
-    D(m) = st.sidebar.slider('D(m)',0.000,0.890,0.500)
-    L/B = st.sidebar.slider('L/B', 1.000,6.000,3.000)
-    angle (degree) = st.sidebar.slider('angle (degree)', 31.950,45.700,33.000)
-    unit weight (kN/m3) = st.sidebar.slider('unit weight (kN/m3)', 9.850,20.800,20.600)
+    B = st.sidebar.slider('B(m)', 0.030,3.016,0.050)
+    D = st.sidebar.slider('D(m)',0.000,0.890,0.500)
+    LoverB = st.sidebar.slider('L/B', 1.000,6.000,3.000)
+    angle = st.sidebar.slider('angle (degree)', 31.950,45.700,33.000)
+    unit weight  = st.sidebar.slider('unit weight (kN/m3)', 9.850,20.800,20.600)
 
 
 
