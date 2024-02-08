@@ -34,26 +34,6 @@ data.isna().sum()
 corr = data.corr()
 st.dataframe(data)
 
-import pickle
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.model_selection import train_test_split
-import pandas as pd
-
-# Sample data (replace with your own data)
-# X, y = your_features, your_labels
-data = pd.read_csv(r"foundation1.csv")
-X = data.iloc[:,:-1]         # Features - All columns but last
-y = data.iloc[:,-1]
-# Split the data
-
-X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=.15,random_state =0)
-# Initialize and train the AdaBoostRegressor
-model = GradientBoostingRegressor(learning_rate=0.01, n_estimators=600, max_depth=3.0)
-model.fit(X_train, y_train)
-
-# Save the model to a pickle file
-with open('GBRT_model.pkl', 'wb') as file:
-    pickle.dump(model, file)
 
 print("Model saved as 'ada_boost_model.pkl'")
 st.sidebar.header('Specify Input Parameters')
