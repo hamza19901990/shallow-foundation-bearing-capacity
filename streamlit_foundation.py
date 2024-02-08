@@ -15,12 +15,12 @@ st.write("""
 This app predicts the **Unconfied Compressive Strength (UCS) of Geopolymer Stabilized Clayey Soil**!
 """)
 st.write('---')
-image=Image.open(r'Unconfined-Compressive-Strength-Test-Apparatus (1).jpg')
+image=Image.open(r'foundation.jpg')
 st.image(image, use_column_width=True)
 
-data = pd.read_csv(r"soil permability.csv")
+data = pd.read_csv(r"foundation1.csv")
 
-req_col_names = ["d10", "d50", "d60", "e","k (m/s)"]
+req_col_names = ["B(m)", "D(m)", "L/B", "angle (degree)","unit weight (kN/m3)","qu"]
 curr_col_names = list(data.columns)
 
 mapper = {}
@@ -34,40 +34,46 @@ data.isna().sum()
 corr = data.corr()
 st.dataframe(data)
 
-X = data.iloc[:,:-1]         # Features - All columns but last
-y = data.iloc[:,-1]          # Target - Last Column
-print(X)
-
-from sklearn.model_selection import train_test_split
 import pickle
-from sklearn.ensemble import AdaBoostRegressor
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+import pandas as pd
 
 # Sample data (replace with your own data)
 # X, y = your_features, your_labels
-
+data = pd.read_csv(r"foundation1.csv")
+X = data.iloc[:,:-1]         # Features - All columns but last
+y = data.iloc[:,-1]
 # Split the data
 
+X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=.15,random_state =0)
 # Initialize and train the AdaBoostRegressor
-model = AdaBoostRegressor(learning_rate=0.5, n_estimators=100)
+model = GradientBoostingRegressor(learning_rate=0.01, n_estimators=600, max_depth=3.0)
 model.fit(X_train, y_train)
 
+# Save the model to a pickle file
+with open('GBRT_model.pkl', 'wb') as file:
+    pickle.dump(model, file)
 
 print("Model saved as 'ada_boost_model.pkl'")
 st.sidebar.header('Specify Input Parameters')
 "d10", "d50", "d60", "e"
 def get_input_features():
-    d10 = st.sidebar.slider('d10', 0.01,0.91,0.05)
-    d50 = st.sidebar.slider('d50',0.02,12.00,1.00)
-    d60 = st.sidebar.slider('d60', 0.03,19.00,13.00)
-    e = st.sidebar.slider('air void', 0.10,0.94,0.85)
+    B(m) = st.sidebar.slider('B(m)', 0.030,3.016,0.050)
+    D(m) = st.sidebar.slider('D(m)',0.000,0.890,0.500)
+    L/B = st.sidebar.slider('L/B', 1.000,6.000,3.000)
+    angle (degree) = st.sidebar.slider('angle (degree)', 31.950,45.700,33.000)
+    unit weight (kN/m3) = st.sidebar.slider('unit weight (kN/m3)', 9.850,20.800,20.600)
 
 
-    data_user = {'d10': d10,
-            'd50': d50,
-            'd60': d60,
-             'air void': e,
+
+
+
+    data_user = {'B(m)': B(m),
+            'D(m)': D(m),
+            'L/B': L/B,
+            'angle (degree)': angle (degree),
+            'unit weight (kN/m3)': unit weight (kN/m3),
 
     }
     features = pd.DataFrame(data_user, index=[0])
@@ -86,7 +92,7 @@ st.write('---')
 
 # Reads in saved classification model
 import pickle
-load_clf = pickle.load(open('ada_boost_model.pkl', 'rb'))
+load_clf = pickle.load(open('GBRT_model.pkl', 'rb'))
 st.header('Prediction of UCS (Mpa)')
 
 # Apply model to make predictions
